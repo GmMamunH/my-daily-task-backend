@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const tasksRoutes = require("./routes/task.route");
-
 const app = express();
 
 app.use(cors());
@@ -11,9 +10,8 @@ app.use(
   })
 );
 
-app.use("/api/tasks", tasksRoutes);
-
 app.use(express.json());
+app.use("/api/tasks", tasksRoutes);
 
 // get html file
 app.get("/", (req, res) => {
@@ -29,4 +27,6 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   res.status(500).json({ message: "Something went wrong" });
 });
+
+
 module.exports = app;
