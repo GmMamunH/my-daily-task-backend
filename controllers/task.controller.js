@@ -1,4 +1,4 @@
-const { model } = require("mongoose");
+
 const Tasks = require("../model/task.model");
 
 // create new tasks
