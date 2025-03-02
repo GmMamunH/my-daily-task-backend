@@ -6,7 +6,7 @@ app.use(express.json());
 
 // get html file
 app.get("/", (req, res) => {
-  res.send("Welcome to the My Daily Task API");
+  res.sendFile(__dirname+"/view/index.html");
 });
 
 
