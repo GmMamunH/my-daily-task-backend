@@ -1,8 +1,4 @@
-const express = require('express');
-
-const app = express();
-
-app.use(express.json());
+const app = require("./app")
 
 const PORT = 4040;
 app.get("/", (req, res)=>{
