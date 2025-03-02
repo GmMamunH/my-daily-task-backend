@@ -2,15 +2,52 @@ const { model } = require("mongoose");
 const Tasks = require("../model/task.model");
 
 // create new tasks
-const createTask = async(require,res)=>{
-   
-    try {
-        const newTask = new Tasks({task: require.body.task});
-        await newTask.save();
-        res.status(201).json(newTask);
-    } catch (error) {
-        res.status(400).json({message: error.message});
-    }
+const createTask = async (req, res) => {
+  try {
+    const newTask = new Tasks({ task: req.body.task });
+    await newTask.save();
+    res.status(201).json(newTask);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+const getAllTask = async(req, res) => {
+  try {
+    const tasks = await Tasks.find();
+    res.json(tasks);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
+const getOneTask = async(req, res) => {
+  try {
+    const task = await Tasks.findById(req.params.id);
+    if (!task) return res.status(404).json({ message: "Task not found" });
+    res.json(task);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 }
 
-model.exports = { createTask };
+const updateTask = async(req, res) => {
+  try {
+    const task = await Tasks.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!task) return res.status(404).json({ message: "Task not found" });
+    res.json(task);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
+
+const deleteTask = async(req, res) => {
+  try {
+    const task = await Tasks.findByIdAndDelete(req.params.id);
+    if (!task) return res.status(404).json({ message: "Task not found" });
+    res.json({ message: "Task deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+module.exports = { createTask, getAllTask, getOneTask, updateTask, deleteTask };

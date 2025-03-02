@@ -8,3 +8,5 @@ const dev = {
         url: process.env.DB_URL || "mongodb://localhost27017/taskDB",
     }
 }
+
+module.exports = dev;

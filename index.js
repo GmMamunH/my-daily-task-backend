@@ -1,9 +1,10 @@
 const app = require("./app")
 
-const PORT = 4040;
-app.get("/", (req, res)=>{
-    res.send("Welcome to the My Daily Task API");
-})
+// Connect to MongoDB
+const config = require("./config/config");
+require("./config/db");
+
+const PORT = config.app.port;
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on port http://localhost:${PORT}`);
