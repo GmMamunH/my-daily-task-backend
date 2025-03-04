@@ -6,7 +6,7 @@ const createTask = async (req, res) => {
   console.log(req.body);
   
   try {
-    const newTask = new Tasks({ task: req.body.task });
+    const newTask = new Tasks({ title: req.body.title });
     
     await newTask.save();
     res.status(201).json(newTask);

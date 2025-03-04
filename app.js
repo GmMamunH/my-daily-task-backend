@@ -3,7 +3,13 @@ const cors = require("cors");
 const tasksRoutes = require("./routes/task.route");
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // সব ডোমেইনের জন্য
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // সব HTTP মেথডের জন্য
+    allowedHeaders: ["Content-Type", "Authorization"], // প্রয়োজনীয় হেডার অনুমতি
+  })
+);
 app.use(
   express.urlencoded({
     extended: true,
